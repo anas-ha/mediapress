@@ -79,13 +79,15 @@ class MPP_Ajax_Gallery_Dir_Loader {
 			$status[] = 'loggedin';
 		}
 
-		// get all public galleries, should we do type filtering.
-		mediapress()->the_gallery_query = new MPP_Gallery_Query( array(
+		$args = array(
 			'status'       => $status,
 			'type'         => $type,
 			'page'         => $page,
 			'search_terms' => $search_terms,
-		) );
+		);
+		$args = apply_filters( 'mpp_main_gallery_dir_ajax_query_args', $args );
+		// get all public galleries, should we do type filtering.
+		mediapress()->the_gallery_query = new MPP_Gallery_Query( $args );
 		ob_start();
 		mpp_get_template( 'gallery/loop-gallery.php' );
 		$contents = ob_get_clean();
