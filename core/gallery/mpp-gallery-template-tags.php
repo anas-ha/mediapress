@@ -650,7 +650,7 @@ function mpp_list_galleries_dropdown( $args = null ) {
 
 	$args = wp_parse_args( $args, $default );
 
-	$component = $args['component'];
+	$component    = $args['component'];
 	$component_id = $args['component_id'];
 
 	if ( ! $component || ! $component_id ) {
@@ -662,15 +662,18 @@ function mpp_list_galleries_dropdown( $args = null ) {
 	$html          = '';
 
 	if ( $args['label_empty'] ) {
-		$html .= "<option value='0'" . selected( 0, $args['selected'], false ) . ">" . $args['label_empty'] . "</option>";
+		$html .= "<option value='0'" . selected( 0, $args['selected'], false ) . ">" . esc_html( $args['label_empty'] ) . "</option>";
 	}
 
 	while ( $mppq->have_galleries() ) {
 		$mppq->the_gallery();
-
-		$selected_attr = selected( $args['selected'], mpp_get_gallery_id(), false );
-
-		$html .= "<option value='" . mpp_get_gallery_id() . "'" . $selected_attr . " data-mpp-type='" . mpp_get_gallery_type() . "'>" . mpp_get_gallery_title() . '</option>';
+		$html .= sprintf(
+			'<option value="%1$s" %2$s data-mpp-type="%3$s">%4$s</option>',
+			absint( mpp_get_gallery_id() ),
+			selected( $args['selected'], mpp_get_gallery_id(), false ),
+			esc_attr( mpp_get_gallery_type() ),
+			esc_html( mpp_get_gallery_title() )
+		);
 	}
 	// reset current gallery.
 	mpp_reset_gallery_data();
@@ -678,7 +681,7 @@ function mpp_list_galleries_dropdown( $args = null ) {
 	$name = $args['name'];
 	$id   = $args['id'];
 	if ( ! empty( $html ) ) {
-		$html = "<select name='{$name}' id='{$id}'>" . $html . '</select>';
+		$html = sprintf( '<select name="%s" id="%s">%s</select>', esc_attr( $name ), esc_attr( $id ), $html );
 	}
 
 	if ( ! $args['echo'] ) {

@@ -36,6 +36,18 @@ function mpp_shortcode_uploader( $atts = array(), $content = '' ) {
 	);
 
 	$atts = shortcode_atts( $default, $atts );
+	// sanitize
+	$atts['gallery_id']         = absint( $atts['gallery_id'] );
+	$atts['component']          = empty( $atts['component'] ) ? $atts['component'] : sanitize_key( $atts['component'] );
+	$atts['component_id']       = absint( $atts['component_id'] );
+	$atts['type']               = empty( $atts['type'] ) ? $atts['type'] : sanitize_key( $atts['type'] );
+	$atts['status']             = empty( $atts['status'] ) ? $atts['status'] : sanitize_key( $atts['status'] );
+	$atts['view']               = empty( $atts['view'] ) ? $atts['view'] : sanitize_key( $atts['view'] );
+	$atts['selected']           = absint( $atts['selected'] );
+	$atts['skip_gallery_check'] = absint( $atts['skip_gallery_check'] );
+	$atts['show_error']         = absint( $atts['show_error'] );
+	$atts['label_empty']        = empty( $atts['label_empty'] ) ? $atts['label_empty'] : sanitize_text_field( $atts['label_empty'] );
+
 	// dropdown list of galleries to allow user select one.
 	$view = 'list';
 
