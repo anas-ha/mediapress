@@ -2,8 +2,8 @@
 Contributors: buddydev,sbrajesh,raviousprime,pressprogrammer
 Tags: buddypress, buddypress gallery, buddypress photo gallery, video gallery, media
 Requires at least: 5.0
-Tested up to: 6.8.3
-Stable tag: 1.6.1
+Tested up to: 6.9.0
+Stable tag: 1.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -162,6 +162,12 @@ Please install [BP Classic](https://wordpress.org/plugins/bp-classic/) plugin to
 Please see the demo or the MediaPress site for more screenshots.
 
 == Changelog ==
+
+= 1.6.2 =
+ * Ensures that the uploader and gallery creation shortcode always escape output.
+ * Fixed a possible stored XSS in media upload shortcode for contributor or above role(people who can add shortcode in post).
+ * Props zaim via Wordfence for reporting the possible stored xss in uploader shortcode.
+
 = 1.6.1 =
  * Added a filter `mpp_main_gallery_dir_ajax_query_args` to allow filtering directory lists on ajax request.
 
