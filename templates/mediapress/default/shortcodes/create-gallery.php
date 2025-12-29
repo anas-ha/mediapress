@@ -17,23 +17,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$title = $description = $status = $type = $component = '';
 
 			if ( ! empty( $_POST['mpp-gallery-title'] ) ) {
-				$title = $_POST['mpp-gallery-title'];
+				$title = wp_unslash( $_POST['mpp-gallery-title'] );
 			}
 
 			if ( ! empty( $_POST['mpp-gallery-description'] ) ) {
-				$description = $_POST['mpp-gallery-description'];
+				$description = wp_unslash( $_POST['mpp-gallery-description'] );
 			}
 
 			if ( ! empty( $_POST['mpp-gallery-status'] ) ) {
-				$status = $_POST['mpp-gallery-status'];
+				$status = wp_unslash( $_POST['mpp-gallery-status'] );
 			}
 
 			if ( ! empty( $_POST['mpp-gallery-type'] ) ) {
-				$type = $_POST['mpp-gallery-type'];
+				$type = wp_unslash( $_POST['mpp-gallery-type'] );
 			}
 
 			if ( ! empty( $_POST['mpp-gallery-component'] ) ) {
-				$component = $_POST['mpp-gallery-component'];
+				$component = wp_unslash( $_POST['mpp-gallery-component'] );
 			}
 
 			$current_component = 'sitewide';// mpp_get_current_component();
@@ -82,7 +82,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				?>
 
 				<input type='hidden' name="mpp-action" value='create-gallery'/>
-				<input type='hidden' name="mpp-gallery-component" value="<?php echo $current_component; ?>"/>
+				<input type='hidden' name="mpp-gallery-component" value="<?php echo esc_attr( $current_component ); ?>"/>
 
 				<div class="mpp-u-1 mpp-clearfix mpp-submit-button">
 					<button type="submit" class='mpp-align-right mpp-button-primary mpp-create-gallery-button '> <?php _e( 'Create', 'mediapress' ); ?></button>
