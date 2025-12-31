@@ -3,7 +3,7 @@ Contributors: buddydev,sbrajesh,raviousprime,pressprogrammer
 Tags: buddypress, buddypress gallery, buddypress photo gallery, video gallery, media
 Requires at least: 5.0
 Tested up to: 6.9.0
-Stable tag: 1.6.2
+Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -162,6 +162,11 @@ Please install [BP Classic](https://wordpress.org/plugins/bp-classic/) plugin to
 Please see the demo or the MediaPress site for more screenshots.
 
 == Changelog ==
+
+= 1.6.3 =
+ * Proper escaping for all template outputs(escaping attributes).
+ * Fixed a possible stored XSS in mpp-list-gallery gallery list shortcode for contributor or above role(people who can add shortcode in post).
+ * Props zaim via Patchstack for reporting the possible stored xss in the shortcode.
 
 = 1.6.2 =
  * Ensures that the uploader and gallery creation shortcode always escape output.
