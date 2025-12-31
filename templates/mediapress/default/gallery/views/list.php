@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <?php
 $gallery = mpp_get_current_gallery();
-$type    = $gallery->type;
+$type    = esc_attr( $gallery->type );
 ?>
 <ul class="mpp-u mpp-item-list mpp-list-item-<?php echo $type; ?>">
 

@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class='mpp-g mpp-item-list mpp-galleries-list'>
 
 		<?php while ( mpp_have_galleries() ) : mpp_the_gallery(); ?>
-			<?php $type = mpp_get_gallery_type(); ?>
+			<?php $type = esc_attr( mpp_get_gallery_type() ); ?>
 			<div class="<?php mpp_gallery_class( mpp_get_gallery_grid_column_class() ); ?>" id="mpp-gallery-<?php mpp_gallery_id(); ?>" data-mpp-type="<?php echo $type;?>" >
 
 				<?php do_action( 'mpp_before_gallery_entry' ); ?>

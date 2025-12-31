@@ -98,12 +98,12 @@ function mpp_shortcode_list_gallery( $atts = null, $content = '' ) {
 		unset( $atts['meta_value'] );
 	}
 	// These variables are used in the template.
-	$shortcode_column = $atts['column'];
-	$show_pagination  = $atts['show_pagination'];
+	$shortcode_column = absint( $atts['column'] );
+	$show_pagination  = absint( $atts['show_pagination'] );
 
-	$show_creator   = $atts['show_creator'];
-	$before_creator = $atts['before_creator'];
-	$after_creator  = $atts['after_creator'];
+	$show_creator   = absint( $atts['show_creator'] );
+	$before_creator = $atts['before_creator'] ? wp_kses_data( $atts['before_creator'] ) : '';
+	$after_creator  = $atts['after_creator'] ? wp_kses_data( $atts['after_creator'] ) : '';
 
 	unset( $atts['column'] );
 	// unset( $atts['view'] );
@@ -112,6 +112,7 @@ function mpp_shortcode_list_gallery( $atts = null, $content = '' ) {
 	unset( $atts['for'] );
 
 	if ( ! empty( $for ) ) {
+		$for = sanitize_key( $for );
 		$atts['user_id'] = mpp_get_dynamic_user_id_for_context( $for );
 		if ( empty( $atts['user_id'] ) ) {
 			return ''; // shortcircuit.
@@ -199,9 +200,9 @@ function mpp_shortcode_show_gallery( $atts = null, $content = '' ) {
 
 	$gallery_id = absint( $atts['id'] );
 
-	$show_creator   = $atts['show_creator'];
-	$before_creator = $atts['before_creator'];
-	$after_creator  = $atts['after_creator'];
+	$show_creator   = absint( $atts['show_creator'] );
+	$before_creator = wp_kses_data( $atts['before_creator'] );
+	$after_creator  = wp_kses_data( $atts['after_creator'] );
 
 
 	global $wpdb;
@@ -223,21 +224,21 @@ function mpp_shortcode_show_gallery( $atts = null, $content = '' ) {
 		unset( $atts['meta_value'] );
 	}
 
-	$view = $atts['view'];
+	$view = sanitize_key( $atts['view'] );
 
 	unset( $atts['id'] );
 	unset( $atts['view'] );
 
 	$atts['gallery_id'] = $gallery_id;
 	$atts['status'] = mpp_get_accessible_statuses( $gallery->component, $gallery->component_id );
-	$shortcode_column = $atts['column'];
+	$shortcode_column = absint( $atts['column'] );
 	mpp_shortcode_save_media_data( 'column', $shortcode_column );
 
 	mpp_shortcode_save_media_data( 'shortcode_args', $atts );
 
 	unset( $atts['column'] );
 
-	$show_pagination = $atts['show_pagination'];
+	$show_pagination = absint( $atts['show_pagination'] );
 	unset( $atts['show_pagination'] );
 
 	$atts = array_filter( $atts );

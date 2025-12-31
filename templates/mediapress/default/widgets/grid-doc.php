@@ -17,7 +17,7 @@ $query = mpp_widget_get_media_data( 'query' ); ?>
 
 			<?php while ( $query->have_media() ) : $query->the_media(); ?>
 				<?php $media = mpp_get_media(); ?>
-				<?php $type = mpp_get_media_type(); ?>
+				<?php $type = esc_attr( mpp_get_media_type() ); ?>
 				<div class="<?php mpp_media_class( 'mpp-widget-item mpp-widget-media-item ' . mpp_get_grid_column_class( 1 ) ); ?>" data-mpp-type="<?php echo $type;?>">
 
 					<?php do_action( 'mpp_before_media_widget_item' ); ?>

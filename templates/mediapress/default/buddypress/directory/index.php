@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="item-list-tabs" role="navigation">
 			<ul>
 				<li class="selected" id="mpp-all">
-					<a href="<?php echo get_permalink( buddypress()->pages->mediapress->id ); ?>"><?php printf( __( 'All Galleries <span>%s</span>', 'mediapress' ), mpp_get_total_gallery_count() ) ?></a>
+					<a href="<?php echo esc_url( get_permalink( buddypress()->pages->mediapress->id ) ); ?>"><?php printf( __( 'All Galleries <span>%s</span>', 'mediapress' ), mpp_get_total_gallery_count() ) ?></a>
 				</li>
 
                 <?php do_action( 'mpp_directory_types' ) ?>
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php $active_types = mpp_get_active_types(); ?>
 
 						<?php foreach( $active_types as $type => $type_object ):?>
-							<option value="<?php echo $type;?>"><?php echo $type_object->get_label();?> </option>
+							<option value="<?php echo esc_attr( $type );?>"><?php echo $type_object->get_label();?> </option>
 						<?php endforeach;?>
 							
 						<?php do_action( 'mpp_gallery_directory_order_options' ) ?>

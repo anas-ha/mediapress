@@ -21,7 +21,7 @@ $media_ids        = join( ',', $query->get_ids() );
 		<div class="mpp-g mpp-item-list mpp-media-list mpp-shortcode-item-list mpp-shortcode-list-media mpp-shortcode-list-media-photo <?php echo $lightbox_class; ?> " data-media-ids="<?php echo $media_ids; ?>">
 
 			<?php while ( $query->have_media() ) : $query->the_media(); ?>
-				<?php $type = mpp_get_media_type(); ?>
+				<?php $type = esc_attr( mpp_get_media_type() ); ?>
 				<div class="mpp-u <?php mpp_media_class( mpp_get_grid_column_class( mpp_shortcode_get_media_data( 'column' ) ) ); ?>" data-mpp-type="<?php echo $type;?>">
 
 					<?php do_action( 'mpp_before_media_shortcode_item' ); ?>

@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         <!-- end of remote media -->
 	<?php endif;?>
 
-    <input type='hidden' name='mpp-context' class="mpp-context" id='mpp-context' value="<?php echo $context; ?>"/>
+    <input type='hidden' name='mpp-context' class="mpp-context" id='mpp-context' value="<?php echo esc_attr( $context ); ?>"/>
 
 	<?php if ( $type ) : ?>
 		<input type='hidden' name='mpp-uploading-media-type' class='mpp-uploading-media-type' value="<?php echo esc_attr( $type ); ?>"/>

@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php
 
 $gallery = mpp_get_current_gallery();
-$type    = $gallery->type;
+$type    = esc_attr( $gallery->type );
 
 ?>
 <?php if ( mpp_have_media() ) : ?>

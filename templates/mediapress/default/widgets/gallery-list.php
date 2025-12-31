@@ -16,7 +16,7 @@ $query = mpp_widget_get_gallery_data( 'query' );
 		<div class='mpp-g mpp-item-list mpp-galleries-list'>
 
 			<?php while ( $query->have_galleries() ) : $query->the_gallery(); ?>
-                <?php $type = mpp_get_gallery_type();?>
+                <?php $type = esc_attr( mpp_get_gallery_type() );?>
 				<div class="<?php mpp_gallery_class( 'mpp-u-1-1' ); ?>" data-mpp-type="<?php echo $type;?>">
 
 					<?php do_action( 'mpp_before_gallery_widget_entry' ); ?>

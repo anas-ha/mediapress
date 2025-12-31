@@ -25,7 +25,7 @@ if ( empty( $query ) ) {
 
 			<?php while ( $query->have_galleries() ) : $query->the_gallery(); ?>
 				<?php $type = mpp_get_gallery_type(); ?>
-				<div class="<?php mpp_gallery_class( mpp_get_grid_column_class( $shortcode_column ) ); ?>" id="mpp-gallery-<?php mpp_gallery_id(); ?>" data-mpp-type="<?php echo $type;?>">
+				<div class="<?php mpp_gallery_class( mpp_get_grid_column_class( $shortcode_column ) ); ?>" id="mpp-gallery-<?php mpp_gallery_id(); ?>" data-mpp-type="<?php echo esc_attr( $type );?>">
 
 					<?php do_action( 'mpp_before_gallery_shortcode_entry' ); ?>
 
@@ -37,7 +37,7 @@ if ( empty( $query ) ) {
 						<a href="<?php mpp_gallery_permalink(); ?>" <?php mpp_gallery_html_attributes( array(
 							'class'            => 'mpp-item-thumbnail mpp-gallery-cover',
 							'data-mpp-context' => 'shortcode',
-						) ); ?> data-mpp-type="<?php echo $type;?>">
+						) ); ?> data-mpp-type="<?php echo esc_attr( $type );?>">
 
 							<img src="<?php mpp_gallery_cover_src( 'thumbnail' ); ?>" alt="<?php echo esc_attr( mpp_get_gallery_title() ); ?>"/>
 						</a>
@@ -49,7 +49,7 @@ if ( empty( $query ) ) {
 						'class'            => 'mpp-item-title mpp-gallery-title',
 						'data-mpp-context' => 'shortcode',
 					) );
-					?> data-mpp-type="<?php echo $type;?>">
+					?> data-mpp-type="<?php echo esc_attr( $type );?>">
 						<?php mpp_gallery_title(); ?>
 					</a>
 

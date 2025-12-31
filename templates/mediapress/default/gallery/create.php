@@ -15,19 +15,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 			$status = mpp_get_default_status();
 
 			if ( ! empty( $_POST['mpp-gallery-title'] ) ) {
-				$title = $_POST['mpp-gallery-title'];
+				$title = wp_unslash( $_POST['mpp-gallery-title'] );
 			}
 
 			if ( ! empty( $_POST['mpp-gallery-description'] ) ) {
-				$description = $_POST['mpp-gallery-description'];
+				$description = wp_unslash( $_POST['mpp-gallery-description'] );
 			}
 
 			if ( ! empty( $_POST['mpp-gallery-status'] ) ) {
-				$status = $_POST['mpp-gallery-status'];
+				$status = wp_unslash( $_POST['mpp-gallery-status'] );
 			}
 
 			if ( ! empty( $_POST['mpp-gallery-type'] ) ) {
-				$type = $_POST['mpp-gallery-type'];
+				$type = wp_unslash( $_POST['mpp-gallery-type'] );
 			}
 
 			?>
