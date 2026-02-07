@@ -926,7 +926,12 @@ function mpp_activity_post_group_update( $args = array() ) {
 	}
 
 	// Record this in activity streams.
-	$activity_action  = sprintf( __( '%1$s posted an update in the group %2$s', 'mediapress' ), bp_core_get_userlink( $user_id ), '<a href="' . esc_url( bp_get_group_permalink( $bp->groups->current_group ) ) . '">' . esc_attr( $bp->groups->current_group->name ) . '</a>' );
+	if ( function_exists( 'bp_get_group_url' ) ) {
+		$group_url = bp_get_group_url( $bp->groups->current_group );
+	} else {
+		$group_url = bp_get_group_permalink( $bp->groups->current_group );
+	}
+	$activity_action  = sprintf( __( '%1$s posted an update in the group %2$s', 'mediapress' ), bp_core_get_userlink( $user_id ), '<a href="' . esc_url( $group_url ) . '">' . esc_attr( $bp->groups->current_group->name ) . '</a>' );
 	$activity_content = $r['content'];
 
 	/**

@@ -25,8 +25,14 @@ function mpp_get_gallery_base_url( $component, $component_id ) {
 
 	if ( 'members' === $component ) {
 		$base_url = trailingslashit( mpp_get_user_url( $component_id ) ) . MPP_GALLERY_SLUG;
-	} elseif ( 'groups' === $component && function_exists( 'bp_get_group_permalink' ) ) {
-		$base_url = trailingslashit( bp_get_group_permalink( new BP_Groups_Group( $component_id ) ) ) . MPP_GALLERY_SLUG;
+	} elseif ( 'groups' === $component && ( function_exists( 'bp_get_group_url' ) || function_exists( 'bp_get_group_permalink' ) ) ) {
+		$group = new BP_Groups_Group( $component_id );
+
+		if ( function_exists( 'bp_get_group_url' ) ) {
+			$base_url = trailingslashit( bp_get_group_url( $group ) ) . MPP_GALLERY_SLUG;
+		} else {
+			$base_url = trailingslashit( bp_get_group_permalink( $group ) ) . MPP_GALLERY_SLUG;
+		}
 	}
 	// for admin new/edit gallery, specially new gallery.
 	if ( ! $base_url && ( empty( $component ) || empty( $component_id ) ) ) {
