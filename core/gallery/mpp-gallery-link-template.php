@@ -9,6 +9,42 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 
 /**
+ * Get group URL with BuddyPress compatibility.
+ *
+ * @param int|object $group Group id or object.
+ *
+ * @return string
+ */
+function mpp_get_group_url( $group = 0 ) {
+
+	if ( empty( $group ) ) {
+		return '';
+	}
+
+	if ( is_numeric( $group ) ) {
+		if ( ! class_exists( 'BP_Groups_Group' ) ) {
+			return '';
+		}
+		$group = new BP_Groups_Group( $group );
+	}
+
+	// Ensure we have a real group object with a valid id.
+	if ( ! is_object( $group ) || empty( $group->id ) ) {
+		return '';
+	}
+
+	if ( function_exists( 'bp_get_group_url' ) ) {
+		return bp_get_group_url( $group );
+	}
+
+	if ( function_exists( 'bp_get_group_permalink' ) ) {
+		return bp_get_group_permalink( $group );
+	}
+
+	return '';
+}
+
+/**
  * Get the base url for the component gallery home page
  * e.g http://site.com/members/user-name/gallery //without any trailing slash
  *
@@ -25,13 +61,10 @@ function mpp_get_gallery_base_url( $component, $component_id ) {
 
 	if ( 'members' === $component ) {
 		$base_url = trailingslashit( mpp_get_user_url( $component_id ) ) . MPP_GALLERY_SLUG;
-	} elseif ( 'groups' === $component && ( function_exists( 'bp_get_group_url' ) || function_exists( 'bp_get_group_permalink' ) ) ) {
-		$group = new BP_Groups_Group( $component_id );
-
-		if ( function_exists( 'bp_get_group_url' ) ) {
-			$base_url = trailingslashit( bp_get_group_url( $group ) ) . MPP_GALLERY_SLUG;
-		} else {
-			$base_url = trailingslashit( bp_get_group_permalink( $group ) ) . MPP_GALLERY_SLUG;
+	} elseif ( 'groups' === $component ) {
+		$group_url = mpp_get_group_url( $component_id );
+		if ( $group_url ) {
+			$base_url = trailingslashit( $group_url ) . MPP_GALLERY_SLUG;
 		}
 	}
 	// for admin new/edit gallery, specially new gallery.
